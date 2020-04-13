@@ -1,0 +1,56 @@
+
+-- DROP DATABASE practica;
+
+CREATE DATABASE practica
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Spanish_Spain.1252'
+    LC_CTYPE = 'Spanish_Spain.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+
+
+-- Table: public.equipos
+
+-- DROP TABLE public.equipos;
+
+CREATE TABLE public.equipos
+(
+    id_equipo integer NOT NULL,
+    nombre_equipo character varying(100) COLLATE pg_catalog."default",
+    id_usuario integer,
+    "cantMienbros " integer,
+    CONSTRAINT equipos_pkey PRIMARY KEY (id_equipo),
+    CONSTRAINT "fk_Tequipos_Tusuarios" FOREIGN KEY (id_equipo)
+        REFERENCES public.usuarios (id_usuario) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.equipos
+    OWNER to postgres;
+
+
+-- Table: public.usuarios
+
+-- DROP TABLE public.usuarios;
+
+CREATE TABLE public.usuarios
+(
+    id_usuario integer NOT NULL,
+    nombre character varying(100) COLLATE pg_catalog."default",
+    apellidos character varying(150) COLLATE pg_catalog."default",
+    "contraseña" character varying(50) COLLATE pg_catalog."default",
+    rol_usuario character varying(100) COLLATE pg_catalog."default",
+    "intentos " integer,
+    CONSTRAINT usuarios_pkey PRIMARY KEY (id_usuario)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.usuarios
+    OWNER to postgres;
