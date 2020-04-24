@@ -44,7 +44,7 @@ CREATE TABLE public.usuarios
     id_usuario integer NOT NULL,
     nombre character varying(100) COLLATE pg_catalog."default",
     apellidos character varying(150) COLLATE pg_catalog."default",
-    "contraseña" character varying(50) COLLATE pg_catalog."default",
+    "contrasena" character varying(50) COLLATE pg_catalog."default",
     rol_usuario character varying(100) COLLATE pg_catalog."default",
     "intentos " integer,
     CONSTRAINT usuarios_pkey PRIMARY KEY (id_usuario)

@@ -24,12 +24,12 @@ def mostrarEquipos():
     conexion.close()
 
 #agregar un nuevo usuario a la base de datos 
-def agregarUsiarios (id,nombre,apellidos,contraseÃ±a,rol_usuarios,intentos):
+def agregarUsiarios (id,nombre,apellidos,contrasena,rol_usuarios,intentos):
     conexion = psycopg2.connect(host = "localhost", database= "practica", user="postgres", password="1234") #String de conexion hacia la base de datos
      
     cur = conexion.cursor()#puntero que me permite realizar acciones hacia la base de datos 
    
-    cur.execute("INSERT INTO public.usuarios  VALUES (%s,%s,%s,%s,%s)",(id,nombre,apellidos,contraseÃ±a,rol_usuarios)))#sentencia sql que realiza la peticion a la base
+    cur.execute("INSERT INTO public.usuarios  VALUES (%s,%s,%s,%s,%s)",(id,nombre,apellidos,contrasena,rol_usuarios)))#sentencia sql que realiza la peticion a la base
     cur.close()
     conexion.commit()#funciona para realizar el guadado y actualizado dentro de la base de datos
 #agregar un nuevo equipo a la base de datos 
@@ -40,10 +40,10 @@ def agregarEquipo(id_equipo, nombre_equipo, id_usuario):
     cur.execute("INSERT INTO public.equipos(id_equipo, nombre_equipo, id_usuario) VALUES (%s, %s, %s)", (id_equipo,nombre_equipo,id_usuario)))#sentencia sql que realiza la peticion a la base
     conexion.commit()#funciona para realizar el guadado y actualizado dentro de la base de datos
 #modificar datos de un equipo 
-def modificarUsuarios(id,nombre,apellidos,contraseÃ±a):
+def modificarUsuarios(id,nombre,apellidos,contrasena):
     conexion = psycopg2.connect(host = "localhost", database= "practica", user="postgres", password="1234")  #String de conexion hacia la base de datos 
     cur = conexion.cursor()#puntero que me permite realizar acciones hacia la base de datos 
-    cur.execute("UPDATE public.usuarios SET nombre=%s,apellidos=%s,contraseÃ±a=%s  where id_usuario= %s ",(nombre,apellidos,contraseÃ±a,id)))#sentencia sql que realiza la peticion a la base
+    cur.execute("UPDATE public.usuarios SET nombre=%s,apellidos=%s,contraseña=%s  where id_usuario= %s ",(nombre,apellidos,contrasena,id)))#sentencia sql que realiza la peticion a la base
     conexion.commit()#funciona para realizar el guadado y actualizado dentro de la base de datos
     print("Los datos han sido actualizados")
     mostarUsuarios()
@@ -82,7 +82,7 @@ def buscarUsuarios(id):
     rows = cur.fetchall ()
     for r in rows :
         if id == r[0]:
-            print(f"id = {r[0]} nombre = {r[1]} Apellidos = {r[2]} ContraseÃ±a = {r[3]} rol = {r[4]} intentos = {r[5]}")
+            print(f"id = {r[0]} nombre = {r[1]} Apellidos = {r[2]} Contraseña = {r[3]} rol = {r[4]} intentos = {r[5]}")
             
             
     else:
@@ -130,10 +130,10 @@ if __name__ == "__main__":
         id = int(input("intruduzca el ID:\n"))
         nombre = input("Ingrese el Nombre:\n")
         apellidos = input("Ingrese el Apelidos:\n")
-        contraseÃ±a = input("Ingrese la ContraseÃ±a:\n ")
+        contrasena = input("Ingrese la Contraseña:\n ")
         rol_usuarios = input("Ingrese el Rol del Usuario en el Sistema:\n")
         intentos = int(input("Intruduzca la Cantidad de Intentos:\n"))
-        agregarUsiarios (id,nombre,apellidos,contraseÃ±a,rol_usuarios,intentos)
+        agregarUsiarios (id,nombre,apellidos,contraseña,rol_usuarios,intentos)
                 
 
     if opcion == 4:
@@ -146,8 +146,8 @@ if __name__ == "__main__":
         id = int(input("intruduzca el ID:\n"))
         nombre = input("Ingrese el Nombre:\n")
         apellidos = input("Ingrese el Apelidos:\n")
-        contraseÃ±a = input("Ingrese la ContraseÃ±a:\n ")
-        modificarUsuarios(id,nombre,apellidos,contraseÃ±a)
+        contrasena = input("Ingrese la Contraseña:\n ")
+        modificarUsuarios(id,nombre,apellidos,contraseña)
 
     if opcion == 6:
         id_equipo  = int(input("intruduzca el ID del Equipo:\n")) 
